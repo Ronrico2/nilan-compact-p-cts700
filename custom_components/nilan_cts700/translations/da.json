@@ -1,0 +1,38 @@
+{
+  "title": "Nilan CTS700 Compact P + AIR9",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Forbind til Nilan CTS700",
+        "description": "Modbus TCP skal være aktiveret på anlægget.",
+        "data": {
+          "host": "IP-adresse eller værtsnavn",
+          "port": "Modbus TCP-port",
+          "compact_slave": "Compact P slave-id",
+          "use_air9": "Medtag AIR9",
+          "air9_slave": "AIR9 slave-id"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Kunne ikke forbinde eller læse CTS700-registeret. Kontrollér IP-adresse, port og slave-id.",
+      "unknown": "Der opstod en ukendt fejl. Se Home Assistant-loggen."
+    },
+    "abort": {
+      "already_configured": "Denne Nilan-installation er allerede konfigureret.",
+      "single_instance_allowed": "Der kan kun oprettes én Nilan CTS700-installation."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opdateringsindstillinger",
+        "data": {
+          "scan_interval": "Opdateringsinterval i sekunder",
+          "message_wait_milliseconds": "Pause mellem Modbus-forespørgsler i millisekunder"
+        }
+      }
+    }
+  }
+}
+
