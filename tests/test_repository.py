@@ -16,7 +16,7 @@ def test_manifests_are_valid_json() -> None:
     hacs = json.loads((ROOT / "hacs.json").read_text())
 
     assert manifest["domain"] == "nilan_cts700"
-    assert manifest["version"] == "1.0.0"
+    assert manifest["version"] == "1.0.1"
     assert hacs["name"] == manifest["name"]
 
 

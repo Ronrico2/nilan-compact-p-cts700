@@ -41,12 +41,12 @@ Issues skal være aktiveret.
 GitHub Actions-filen kører både HACS-validering og Hassfest. Begge jobs skal
 være grønne. Ret eventuelle fejl, før der oprettes en release.
 
-## 4. Opret første release
+## 4. Opret release
 
 Opret en rigtig GitHub Release, ikke kun et tag:
 
-- Tag: `v1.0.0`
-- Titel: `Nilan CTS700 v1.0.0`
+- Tag: `v1.0.1`
+- Titel: `Nilan CTS700 v1.0.1`
 - Target: standardbranchens seneste commit
 
 ## 5. Brug som brugerdefineret HACS-repository
@@ -62,4 +62,3 @@ Repositoryet kan straks bruges gennem HACS:
 Når repositoryet er offentligt, valideret og har en release, kan ejeren sende
 en pull request til `hacs/default` under kategorien `integration`. Dette er ikke
 nødvendigt for brugerdefineret installation og kan have lang behandlingstid.
-

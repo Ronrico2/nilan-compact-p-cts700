@@ -32,7 +32,7 @@ brugerdefineret repository:
 
 1. Åbn **HACS**.
 2. Vælg menuen med de tre prikker og **Custom repositories**.
-3. Indsæt `https://github.com/Ronrico2/nilan-cts700`.
+3. Indsæt `https://github.com/YOUR_GITHUB_USERNAME/nilan-cts700`.
 4. Vælg kategorien **Integration** og tryk **Add**.
 5. Find **Nilan CTS700 Compact P + AIR9**, vælg **Download**, og genstart
    Home Assistant.

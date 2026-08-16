@@ -32,6 +32,7 @@ class FakeClient:
         self.reads: list[tuple[int, int, int]] = []
         self.writes: list[tuple[int, int, int]] = []
         self.fail_addresses: set[int] = set()
+        self.fail_registers: set[int] = set()
         self.closed = False
 
     async def connect(self) -> bool:
@@ -42,7 +43,9 @@ class FakeClient:
         self, address: int, *, count: int, device_id: int
     ) -> FakeResponse:
         self.reads.append((address, count, device_id))
-        if address in self.fail_addresses:
+        if address in self.fail_addresses or any(
+            address <= register < address + count for register in self.fail_registers
+        ):
             return FakeResponse([], error=True)
         return FakeResponse([address + offset & 0xFFFF for offset in range(count)])
 
@@ -109,11 +112,21 @@ async def test_partial_block_failure_keeps_other_data() -> None:
 
 
 @pytest.mark.asyncio
+async def test_failed_register_isolated_from_rest_of_group() -> None:
+    client = make_client()
+    client._client.fail_registers.add(21774)
+
+    data = await client.async_read_all()
+
+    assert data[(ROLE_COMPACT, 21773)] == 21773
+    assert (ROLE_COMPACT, 21774) not in data
+    assert data[(ROLE_COMPACT, 21775)] == 21775
+
+
+@pytest.mark.asyncio
 async def test_all_blocks_failed_raises_connection_error() -> None:
     client = make_client()
-    client._client.fail_addresses.update(
-        {20100, 20260, 20340, 20460, 21770, 22490, 20602, 20680, 21900}
-    )
+    client._client.fail_registers.update(range(0, 65536))
 
     with pytest.raises(NilanConnectionError):
         await client.async_read_all()

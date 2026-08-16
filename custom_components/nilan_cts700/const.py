@@ -35,21 +35,51 @@ PLATFORMS = (
     "switch",
 )
 
-# The blocks are deliberately kept below the Modbus limit of 125 registers.
-# Reading blocks instead of individual registers reduces load on the CTS700.
+# Only documented, actually used registers are grouped together. Some CTS700
+# firmware rejects a whole Modbus request when the requested range crosses an
+# unsupported register, even when the requested start and end are valid.
 REGISTER_BLOCKS: dict[str, tuple[tuple[int, int], ...]] = {
     ROLE_COMPACT: (
-        (20100, 81),
-        (20260, 39),
+        (20100, 1),
+        (20102, 2),
+        (20106, 2),
+        (20120, 1),
+        (20140, 8),
+        (20164, 1),
+        (20180, 1),
+        (20260, 2),
+        (20282, 1),
+        (20284, 1),
+        (20286, 1),
+        (20288, 1),
+        (20290, 1),
+        (20292, 1),
+        (20294, 1),
+        (20296, 1),
+        (20298, 1),
         (20340, 1),
-        (20460, 63),
-        (21770, 22),
-        (22490, 2),
+        (20460, 1),
+        (20462, 1),
+        (20464, 1),
+        (20520, 1),
+        (20522, 1),
+        (21770, 7),
+        (21778, 1),
+        (21780, 2),
+        (21788, 1),
+        (21791, 1),
+        (22490, 1),
     ),
     ROLE_AIR9: (
         (20602, 1),
-        (20680, 21),
-        (21900, 14),
+        (20680, 1),
+        (20684, 1),
+        (20686, 1),
+        (20688, 1),
+        (20690, 1),
+        (20700, 1),
+        (21900, 6),
+        (21913, 1),
     ),
 }
 

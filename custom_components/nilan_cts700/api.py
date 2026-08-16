@@ -106,14 +106,16 @@ class NilanModbusClient:
             for role in roles:
                 for start, count in REGISTER_BLOCKS[role]:
                     try:
-                        registers = await self._async_read_block(role, start, count)
+                        registers, block_errors = await self._async_read_resilient(
+                            role, start, count
+                        )
                     except NilanError as err:
                         errors.append(str(err))
                     else:
-                        for offset, value in enumerate(registers):
-                            data[(role, start + offset)] = value
-                    if self.message_wait:
-                        await asyncio.sleep(self.message_wait)
+                        data.update(
+                            {(role, address): value for address, value in registers.items()}
+                        )
+                        errors.extend(block_errors)
 
         if not data:
             detail = errors[0] if errors else "Intet svar fra anlægget"
@@ -121,6 +123,34 @@ class NilanModbusClient:
         if errors:
             _LOGGER.debug("Nogle Nilan-registerblokke kunne ikke læses: %s", "; ".join(errors))
         return data
+
+    async def _async_read_resilient(
+        self, role: str, address: int, count: int
+    ) -> tuple[dict[int, int], list[str]]:
+        """Read a group and isolate unsupported registers when it is rejected."""
+        try:
+            values = await self._async_read_block(role, address, count)
+        except NilanModbusError as err:
+            await self._async_pause()
+            if count == 1:
+                return {}, [str(err)]
+
+            left_count = count // 2
+            right_count = count - left_count
+            left_values, left_errors = await self._async_read_resilient(role, address, left_count)
+            right_values, right_errors = await self._async_read_resilient(
+                role, address + left_count, right_count
+            )
+            left_values.update(right_values)
+            return left_values, left_errors + right_errors
+
+        await self._async_pause()
+        return {address + offset: value for offset, value in enumerate(values)}, []
+
+    async def _async_pause(self) -> None:
+        """Respect the configured pause between Modbus requests."""
+        if self.message_wait:
+            await asyncio.sleep(self.message_wait)
 
     async def _async_read_block(self, role: str, address: int, count: int) -> list[int]:
         """Read one block while the caller holds the client lock."""
