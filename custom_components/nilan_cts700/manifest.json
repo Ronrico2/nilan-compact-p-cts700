@@ -1,5 +1,5 @@
 {
-  "codeowners": [Ronrico2],
+  "codeowners": ["Ronrico2"],
   "config_flow": true,
   "dependencies": ["http", "modbus"],
   "documentation": "https://github.com/Ronrico2/nilan-cts700",
