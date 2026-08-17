@@ -45,14 +45,19 @@ brugerdefineret repository:
 
 1. Åbn et dashboard og vælg **Rediger dashboard**.
 2. Tilføj et **Manuelt** kort.
-3. Kopiér indholdet fra [`dashboard/nilan_panel.yaml`](dashboard/nilan_panel.yaml).
+3. Kopiér indholdet fra
+   [`custom_components/nilan_cts700/dashboard/nilan_panel.yaml`](custom_components/nilan_cts700/dashboard/nilan_panel.yaml).
+
+Efter installation med HACS findes filen i File Editor under
+`/config/custom_components/nilan_cts700/dashboard/nilan_panel.yaml`.
 
 Billederne installeres sammen med integrationen og hentes fra
 `/nilan_cts700_static/`; de skal ikke kopieres til `/config/www`.
 
-Hvis Home Assistant tidligere har oprettet entitets-id'er med suffikser som
-`_2`, skal id'erne i kortet tilpasses, eller de gamle, utilgængelige entiteter
-skal slettes før integrationen tilføjes igen.
+Dashboardet bruger Home Assistants enhedsbaserede entity-id'er med præfikserne
+`nilan_compact_p_` og `nilan_air9_`. Hvis en ældre installation har fået
+suffikser som `_2`, skal de gamle, utilgængelige entiteter slettes før
+integrationen tilføjes igen.
 
 ## Migrering fra den gamle package-YAML
 
@@ -96,4 +101,3 @@ temperaturgrænser, og behold anlæggets indbyggede sikkerhedsfunktioner aktive.
 
 Koden udgives under MIT-licensen. Billeder og varemærker tilhører deres
 respektive ejere og bruges alene til identifikation af det understøttede anlæg.
-

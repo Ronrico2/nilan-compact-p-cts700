@@ -45,8 +45,8 @@ være grønne. Ret eventuelle fejl, før der oprettes en release.
 
 Opret en rigtig GitHub Release, ikke kun et tag:
 
-- Tag: `v1.0.1`
-- Titel: `Nilan CTS700 v1.0.1`
+- Tag: `v1.0.2`
+- Titel: `Nilan CTS700 v1.0.2`
 - Target: standardbranchens seneste commit
 
 ## 5. Brug som brugerdefineret HACS-repository

@@ -1,5 +1,12 @@
 # Ændringslog
 
+## 1.0.2
+
+- Rettet alle entity-id'er i Picture Elements-dashboardet til Home Assistants
+  enhedsbaserede navngivning for Compact P og AIR9.
+- Dashboard-YAML følger nu med HACS-installationen under
+  `custom_components/nilan_cts700/dashboard/`.
+
 ## 1.0.1
 
 - Rettet registerlæsning på CTS700-firmware, der afviser brede områder med

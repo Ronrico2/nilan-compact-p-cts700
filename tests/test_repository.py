@@ -16,7 +16,7 @@ def test_manifests_are_valid_json() -> None:
     hacs = json.loads((ROOT / "hacs.json").read_text())
 
     assert manifest["domain"] == "nilan_cts700"
-    assert manifest["version"] == "1.0.1"
+    assert manifest["version"] == "1.0.2"
     assert hacs["name"] == manifest["name"]
 
 
@@ -27,7 +27,7 @@ def test_dashboard_is_valid_and_has_no_duplicate_heating_button() -> None:
     heating = [
         element
         for element in dashboard["elements"]
-        if element.get("entity") == "switch.nilan_centralvarme_drift"
+        if element.get("entity") == "switch.nilan_air9_nilan_centralvarme_drift"
     ]
     assert len(heating) == 1
     assert dashboard["image"].startswith("/nilan_cts700_static/")
@@ -42,3 +42,11 @@ def test_every_dashboard_image_exists() -> None:
     }
     assert image_names
     assert all((COMPONENT / "frontend" / name).is_file() for name in image_names)
+
+
+def test_hacs_installed_dashboard_matches_repository_example() -> None:
+    """The dashboard shipped inside the component must stay in sync."""
+    repository_dashboard = ROOT / "dashboard" / "nilan_panel.yaml"
+    installed_dashboard = COMPONENT / "dashboard" / "nilan_panel.yaml"
+
+    assert installed_dashboard.read_text() == repository_dashboard.read_text()
