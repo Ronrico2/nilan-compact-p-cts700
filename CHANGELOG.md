@@ -1,5 +1,14 @@
 # Ændringslog
 
+## 1.0.3
+
+- Kontakter viser nu den skrevne tilstand straks uden at vente på en komplet
+  genlæsning af alle Modbus-registre.
+- Ventilationsvælgeren viser det valgte trin optimistisk og bekræfter det
+  efterfølgende mod den målte ventilatorhastighed.
+- Ventilationskommandoen genlæses i baggrunden, så dashboardet ikke låses under
+  en langsom CTS700-opdatering.
+
 ## 1.0.2
 
 - Rettet alle entity-id'er i Picture Elements-dashboardet til Home Assistants

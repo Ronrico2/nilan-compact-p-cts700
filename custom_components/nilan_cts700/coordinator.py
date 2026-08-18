@@ -9,7 +9,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-from .api import NilanError, NilanModbusClient, RegisterKey
+from .api import NilanError, NilanModbusClient, RegisterKey, encode_int16
 from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
@@ -44,9 +44,12 @@ class NilanDataUpdateCoordinator(DataUpdateCoordinator[dict[RegisterKey, int]]):
             raise UpdateFailed(str(err)) from err
 
     async def async_write(self, role: str, address: int, value: int) -> None:
-        """Write a value and refresh all entities."""
+        """Write a value and publish it without blocking on a complete poll."""
         try:
             await self.api.async_write_register(role, address, value)
         except NilanError as err:
             raise UpdateFailed(str(err)) from err
-        await self.async_request_refresh()
+
+        updated_data = dict(self.data)
+        updated_data[(role, address)] = encode_int16(value)
+        self.async_set_updated_data(updated_data)
