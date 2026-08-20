@@ -89,11 +89,14 @@ class NilanVentilationSelect(NilanEntity, SelectEntity):
             if option == "Slukket":
                 await self.coordinator.async_write(ROLE_COMPACT, 20100, 1)
             else:
+                # CTS700 can ignore the fan command while ventilation pause is
+                # active. Always release the pause before selecting a level so
+                # the unit cannot remain stopped after choosing "Slukket".
+                await self.coordinator.async_write(ROLE_COMPACT, 20100, 0)
+                await asyncio.sleep(0.3)
                 await self.coordinator.api.async_write_register(
                     ROLE_COMPACT, 4747, FAN_COMMANDS[option]
                 )
-                await asyncio.sleep(0.3)
-                await self.coordinator.async_write(ROLE_COMPACT, 20100, 0)
         except Exception:
             self._optimistic_option = None
             self.async_write_ha_state()

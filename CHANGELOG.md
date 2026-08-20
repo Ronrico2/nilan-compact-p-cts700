@@ -1,5 +1,19 @@
 # Ændringslog
 
+## 1.0.5
+
+- Gendannet det komplette `nilan_panel.png`, som ved en tidligere pakning blev
+  afkortet og derfor gav en sort nederste halvdel i Picture Elements-kortet.
+- Tilføjet automatisk validering af PNG-signatur, datastruktur, CRC og
+  afsluttende IEND-blok for alle frontendbilleder.
+
+## 1.0.4
+
+- Rettet start efter `Slukket`: ventilationspausen frigives nu, før CTS700 får
+  kommandoen for det valgte blæsertrin.
+- En afvist hastighedskommando kan derfor ikke længere efterlade anlægget låst
+  i ventilationspause indtil genstart.
+
 ## 1.0.3
 
 - Kontakter viser nu den skrevne tilstand straks uden at vente på en komplet
