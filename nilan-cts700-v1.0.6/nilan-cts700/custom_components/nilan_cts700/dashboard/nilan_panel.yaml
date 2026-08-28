@@ -1,0 +1,144 @@
+type: picture-elements
+elements:
+  - type: image
+    entity: select.nilan_compact_p_nilan_ventilationstrin
+    title: null
+    image: /nilan_cts700_static/ventilation_slukket.png
+    state_image:
+      Slukket: /nilan_cts700_static/ventilation_slukket.png
+      Trin 1: /nilan_cts700_static/ventilation_trin_1.png
+      Trin 2: /nilan_cts700_static/ventilation_trin_2.png
+      Trin 3: /nilan_cts700_static/ventilation_trin_3.png
+      Trin 4: /nilan_cts700_static/ventilation_trin_4.png
+      unknown: /nilan_cts700_static/ventilation_slukket.png
+      unavailable: /nilan_cts700_static/ventilation_slukket.png
+    filter: none
+    tap_action:
+      action: perform-action
+      perform_action: select.select_next
+      target:
+        entity_id: select.nilan_compact_p_nilan_ventilationstrin
+      data:
+        cycle: true
+    hold_action:
+      action: more-info
+    style:
+      left: 89.25%
+      top: 51.15%
+      width: 12.6%
+      clip-path: circle(48% at 50% 50%)
+      cursor: pointer
+      pointer-events: auto
+      z-index: 10
+
+  - type: image
+    entity: switch.nilan_air9_nilan_centralvarme_drift
+    title: null
+    image: /nilan_cts700_static/centralvarme_slukket.png
+    state_image:
+      "off": /nilan_cts700_static/centralvarme_slukket.png
+      "on": /nilan_cts700_static/centralvarme_taendt.png
+      unknown: /nilan_cts700_static/centralvarme_slukket.png
+      unavailable: /nilan_cts700_static/centralvarme_slukket.png
+    filter: none
+    tap_action:
+      action: toggle
+    hold_action:
+      action: more-info
+    style:
+      left: 89.25%
+      top: 80.75%
+      width: 12.6%
+      clip-path: circle(48% at 50% 50%)
+
+  - type: state-label
+    entity: sensor.nilan_compact_p_nilan_t1_udendorstemperatur
+    style:
+      color: blue
+      font-size: 100%
+      left: 43%
+      top: 32%
+
+  - type: state-label
+    entity: sensor.nilan_compact_p_nilan_t4_afkast_efter_veksler
+    style:
+      color: red
+      font-size: 100%
+      left: 53%
+      top: 32%
+
+  - type: state-label
+    entity: sensor.nilan_compact_p_nilan_t3_fraluftstemperatur
+    style:
+      color: red
+      font-size: 100%
+      left: 43%
+      top: 59%
+
+  - type: state-label
+    entity: sensor.nilan_compact_p_nilan_t2_tilluftstemperatur
+    style:
+      color: blue
+      font-size: 100%
+      left: 54%
+      top: 59%
+
+  - type: state-label
+    entity: sensor.nilan_compact_p_nilan_faktisk_luftfugtighed
+    style:
+      color: black
+      font-size: 110%
+      left: 41%
+      top: 83%
+
+  - type: state-label
+    entity: sensor.nilan_compact_p_nilan_t11_varmtvandsbeholder_top
+    style:
+      color: red
+      font-size: 110%
+      left: 65.5%
+      top: 83%
+
+  - type: state-label
+    entity: sensor.nilan_air9_nilan_air_t20_udendorstemperatur
+    style:
+      color: black
+      font-size: 130%
+      left: 92%
+      top: 21%
+
+  - type: state-label
+    entity: sensor.nilan_air9_nilan_air_t18_fremlob_buffertank
+    style:
+      color: red
+      font-size: 110%
+      left: 31%
+      top: 83%
+
+  - type: state-label
+    entity: sensor.nilan_compact_p_nilan_faktisk_tilluftventilatorhastighed
+    style:
+      color: black
+      font-size: 120%
+      left: 59%
+      top: 46%
+
+  - type: state-label
+    entity: sensor.nilan_compact_p_nilan_faktisk_udsugningsventilatorhastighed
+    style:
+      color: black
+      font-size: 120%
+      left: 36.1%
+      top: 46%
+
+  - type: state-label
+    entity: sensor.nilan_compact_p_nilan_filterinterval_udsugning_intern
+    style:
+      color: black
+      font-size: 120%
+      left: 47.5%
+      top: 50.8%
+
+image: /nilan_cts700_static/nilan_panel.png
+grid_options:
+  rows: auto

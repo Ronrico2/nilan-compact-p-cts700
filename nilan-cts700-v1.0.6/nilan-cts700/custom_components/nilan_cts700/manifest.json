@@ -1,0 +1,13 @@
+{
+  "codeowners": [],
+  "config_flow": true,
+  "dependencies": ["http", "modbus"],
+  "documentation": "https://github.com/YOUR_GITHUB_USERNAME/nilan-cts700",
+  "domain": "nilan_cts700",
+  "integration_type": "hub",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/YOUR_GITHUB_USERNAME/nilan-cts700/issues",
+  "name": "Nilan CTS700 Compact P + AIR9",
+  "single_config_entry": true,
+  "version": "1.0.6"
+}
